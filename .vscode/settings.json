@@ -1,3 +1,9 @@
 {
-    "github.copilot.editor.enableAutoCompletions": false
+    "github.copilot.editor.enableAutoCompletions": false,
+    "cmake.configureOnOpen": true,
+    "files.associations": {
+        "xtree": "cpp",
+        "map": "cpp"
+    },
+    "buildDir": "${workspaceRoot}\\build",
 }

@@ -59,6 +59,12 @@
  * complexity?
  */
 
+#include <iostream>
+#include <vector>
+#include <map>
+
+using namespace std;
+
 // @lc code=start
 class Solution {
 public:
@@ -77,3 +83,13 @@ public:
 };
 // @lc code=end
 
+int main() {
+    Solution solution;
+    vector<int> nums = {2, 7, 11, 15};
+    int target = 9;
+    vector<int> result = solution.twoSum(nums, target);
+    for (int i : result) {
+        cout << i << " ";
+    }
+    return 0;
+}
