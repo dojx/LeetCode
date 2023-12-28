@@ -3,7 +3,8 @@
     "cmake.configureOnOpen": true,
     "files.associations": {
         "xtree": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "stack": "cpp"
     },
     "buildDir": "${workspaceRoot}\\build",
 }
