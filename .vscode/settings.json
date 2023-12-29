@@ -4,7 +4,16 @@
     "files.associations": {
         "xtree": "cpp",
         "map": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "vector": "cpp",
+        "array": "cpp",
+        "deque": "cpp",
+        "initializer_list": "cpp",
+        "ranges": "cpp",
+        "span": "cpp",
+        "utility": "cpp",
+        "xstring": "cpp",
+        "xutility": "cpp"
     },
     "buildDir": "${workspaceRoot}\\build",
 }
