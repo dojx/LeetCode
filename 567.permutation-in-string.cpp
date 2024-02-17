@@ -70,8 +70,7 @@ public:
         while (r < s2_size) {
             if (s1_count == s2_count) return true;
             s2_count[int(s2[l]) - int('a')]--;
-            l++;
-            r++;
+            l++, r++;
             s2_count[int(s2[r]) - int('a')]++;
         }
         if (s1_count == s2_count) return true;
