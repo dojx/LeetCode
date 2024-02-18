@@ -25,21 +25,46 @@
 class Solution {
 public:
     void reorderList(ListNode* head) {
-        ListNode *curr = head, *temp, *tail;
-        temp = curr->next;
-        tail = curr;
+        // ListNode *curr = head, *temp, *tail;
+        // temp = curr->next;
+        // tail = curr;
 
-        while (temp->next != nullptr) {
-            // find tail of current list
-            while (tail->next->next != nullptr) {
-                tail = tail->next->next;
+        // while (temp->next != nullptr) {
+        //     // find tail of current list
+        //     while (tail->next->next != nullptr) {
+        //         tail = tail->next;
+        //     }
+        //     curr->next = tail;
+        //     curr = temp;
+        //     tail->next = curr;
+        //     tail = curr;
+        //     temp = curr->next;
+        // }
+
+        ListNode *curr = head;
+        ListNode *tail = curr;
+        ListNode *next;
+        ListNode *temp;
+
+        while (1) {
+            if (curr->next == nullptr || curr->next->next == nullptr) {
+                if (tail != head) {
+                    tail->next = curr;
+                }
+                return;
             }
-            curr->next = tail;
+            next = curr->next;
+            while (curr->next->next != nullptr) {
+                curr = curr->next;
+            }
+            temp = curr->next;
+            curr->next = nullptr;
             curr = temp;
             tail->next = curr;
+            curr = next;
             tail = curr;
-            temp = curr->next;
         }
+
     }
 };
 // @lc code=end
