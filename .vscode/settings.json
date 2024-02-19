@@ -16,4 +16,5 @@
         "xutility": "cpp"
     },
     "buildDir": "${workspaceRoot}\\build",
+    "C_Cpp.errorSquiggles": "disabled",
 }
