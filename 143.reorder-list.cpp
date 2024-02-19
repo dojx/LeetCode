@@ -25,47 +25,59 @@
 class Solution {
 public:
     void reorderList(ListNode* head) {
-        // ListNode *curr = head, *temp, *tail;
-        // temp = curr->next;
-        // tail = curr;
+        ListNode *slow, *fast;
+        slow = fast = head;
 
-        // while (temp->next != nullptr) {
-        //     // find tail of current list
-        //     while (tail->next->next != nullptr) {
-        //         tail = tail->next;
-        //     }
-        //     curr->next = tail;
-        //     curr = temp;
-        //     tail->next = curr;
-        //     tail = curr;
-        //     temp = curr->next;
-        // }
-
-        ListNode *curr = head;
-        ListNode *tail = curr;
-        ListNode *next;
-        ListNode *temp;
-
-        while (1) {
-            if (curr->next == nullptr || curr->next->next == nullptr) {
-                if (tail != head) {
-                    tail->next = curr;
-                }
-                return;
-            }
-            next = curr->next;
-            while (curr->next->next != nullptr) {
-                curr = curr->next;
-            }
-            temp = curr->next;
-            curr->next = nullptr;
-            curr = temp;
-            tail->next = curr;
-            curr = next;
-            tail = curr;
+        // find mid point
+        while (fast->next != nullptr) {
+            slow = slow->next;
+            if (fast->next->next == nullptr) break;
+            fast = fast->next->next;
         }
 
+        // reverse second list
+        ListNode *prev = nullptr;
+        while (slow != nullptr) {
+            fast = slow->next;
+            slow->next = prev;
+            prev = slow;
+            slow = fast;
+        }
+
+        // merge two lists
+        ListNode *temp;
+        fast = head;
+        slow = prev;
+        while (fast != nullptr && slow != nullptr) {
+            temp = fast->next;
+            fast->next = slow;
+            fast = slow;
+            slow = temp;
+        }
+
+        // If there are remaining nodes in either list, append them to the end
+        if (fast != nullptr) {
+            fast->next = slow;
+        }
     }
 };
 // @lc code=end
 
+// O(n^2) solution
+// void reorderList(ListNode* head) {
+//         ListNode *curr, *next, *tail, *temp;
+//         curr = head;
+
+//         while (curr->next != nullptr && curr->next->next != nullptr) {
+//             next = curr->next;
+//             tail = curr;
+//             while (tail->next->next != nullptr) {
+//                 tail = tail->next;
+//             }
+//             temp = tail->next;
+//             tail->next = nullptr;
+//             curr->next = temp;
+//             temp->next = next;
+//             curr = next;
+//         }
+//     }
