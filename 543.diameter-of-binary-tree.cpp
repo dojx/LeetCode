@@ -23,15 +23,19 @@
  */
 class Solution {
 public:
+    int globalMax = 0;
+
     int diameterOfBinaryTree(TreeNode* root) {
-        return helper(root, 0);
+        helper(root);
+        return globalMax;
     }
 
-    int helper(TreeNode* root, int globalMax) {
-        if (root == nullptr) return 0;
-        int left = helper(root->left, globalMax) + 1;
-        int right = helper(root->right, globalMax) + 1; 
-        return max(globalMax, left + right);
+    int helper(TreeNode* root) {
+        if (root == nullptr) return -1;
+        int left = helper(root->left);
+        int right = helper(root->right); 
+        globalMax = max(globalMax, left + right + 2); 
+        return max(left, right) + 1;
     }
 };
 // @lc code=end
