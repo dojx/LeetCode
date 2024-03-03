@@ -22,20 +22,26 @@ public:
     TreeNode* res;
 
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        helper(root, p, q);
+        // helper(root, p, q);
+        // return res;
+        if (root == p || root == q) return root;
+        if (((p->val < root->val) && (q->val > root->val)) || ((p->val > root->val) && (q->val < root->val))) return root;
+        TreeNode* res;
+        if (p->val < root->val && q->val < root->val) res = lowestCommonAncestor(root->left, p, q);
+        else res = lowestCommonAncestor(root->right, p, q);
         return res;
     }
 
-    bool helper(TreeNode* root, TreeNode* p, TreeNode* q) {
-        if (!root) return false;
-        // if (root == p || root == q) return true;
-        // return helper(root->left, p, q) && helper(root->right, p, q)
-        bool leftContains = helper(root->left, p, q);
-        bool rightContains = helper(root->right, p, q);
-        if (leftContains && rightContains) res = root;
-        if ((root == p || root == q) && (leftContains || rightContains)) res = root;
-        return leftContains || rightContains;
-    }
+    // bool helper(TreeNode* root, TreeNode* p, TreeNode* q) {
+    //     if (!root) return false;
+    //     // if (root == p || root == q) return true;
+    //     bool leftContains = helper(root->left, p, q);
+    //     bool rightContains = helper(root->right, p, q);
+    //     if (leftContains && rightContains) res = root;
+    //     if ((root == p || root == q) && (leftContains || rightContains)) res = root;
+    //     if (root == p || root == q) return true;
+    //     return leftContains || rightContains;
+    // }
 };
 // @lc code=end
 
