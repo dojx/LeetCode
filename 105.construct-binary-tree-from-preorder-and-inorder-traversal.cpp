@@ -5,6 +5,7 @@
  */
 
 // @lc code=start
+#include <iterator>
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -19,7 +20,25 @@
 class Solution {
 public:
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        if (!preorder.size() || !inorder.size()) return nullptr;
+
+        TreeNode* root = new TreeNode(preorder[0]);
+        int inorderRootIndex = 0;
+        for (int i = 0; i < inorder.size(); i++) {
+            if (inorder[i] == preorder[0]) {
+                inorderRootIndex = i;
+                break;
+            }
+        }
+        vector<int> preorderLeftSublist(preorder.begin() + 1, preorder.begin() + inorderRootIndex + 1);
+        vector<int> inorderLeftSublist(inorder.begin(), inorder.begin() + inorderRootIndex);
+        root->left = buildTree(preorderLeftSublist, inorderLeftSublist);
         
+        vector<int> preorderRightSublist(preorder.begin() + inorderRootIndex + 1, preorder.end());
+        vector<int> inorderRightSublist(inorder.begin() + inorderRootIndex + 1, inorder.end());
+        root->right = buildTree(preorderRightSublist, inorderRightSublist);
+        
+        return root; 
     }
 };
 // @lc code=end
